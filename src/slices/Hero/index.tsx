@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import Bounded from "@/components/Bounded";
 import Shapes from "./shapes";
 
+
 /**
  * Props for `Hero`.
  */
@@ -86,6 +87,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 
         </div>
       </div>
+       
     </Bounded>
   );
 };
