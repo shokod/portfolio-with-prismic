@@ -1,9 +1,14 @@
+"use client"
+import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { MdCircle } from "react-icons/md";
-import { div } from "three/examples/jsm/nodes/Nodes.js";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /**
  * Props for `TechList`.
@@ -14,35 +19,80 @@ export type TechListProps = SliceComponentProps<Content.TechListSlice>;
  * Component for "TechList" Slices.
  */
 const TechList = ({ slice }: TechListProps): JSX.Element => {
+const component = React.useRef(null);
+
+useEffect(() => {
+  let ctx = gsap.context(() => {
+    const tml = gsap.timeline({
+      scrollTrigger: {
+        markers: true,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 4,
+      },
+    }); 
+
+    tml.fromTo(
+      ".tech-row",
+      {
+        x: (index) => {
+          return index % 2 === 0
+            ? gsap.utils.random(600, 400)
+            : gsap.utils.random(-600, -400);
+        },
+      },
+      {
+        x: (index) => {
+          return index % 2 === 0
+            ? gsap.utils.random(-600, -400)
+            : gsap.utils.random(600, 400);
+        },
+
+      },
+    )
+  }, component);
+
+  return () => ctx.revert();
+})
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="overflow-hidden"
+      ref={component}
     >
-      <Heading size="lg" as="h2">
-        {slice.primary.heading}
-      </Heading>
+      <Bounded as="div">
+        <Heading size="lg" as="h2" className="mb-8">
+          {slice.primary.heading}
+        </Heading>
+      </Bounded>
       {slice.items.map(({ tech_color, tech_name }, index) => (
-        <div key={index} className="tech-row mb-8 items-center justify-center gap-4 text-slate-700">
+        <div
+          key={index}
+          className="tech-row mb-6 flex items-center justify-center gap-4 text-slate-700"
+          aria-label={tech_name || undefined}
+        >
           {Array.from({ length: 15 }, (_, index) => (
-            <React.Fragment key={index}>
+            <React.Fragment
+              key={index}>
               <span
-                className="tech-item text-5xl font-extrabold uppercase tracking-ti"
+                className="tech-item text-5xl font-extrabold uppercase tracking-tighter"
                 style={{
-                  color: index === 3 && tech_color ? tech_color : "inherit"
+                  color: index === 7 && tech_color ? tech_color : "inherit"
                 }}
               >
                 {tech_name}
               </span>
-              {/* <span className="text-xl">
+              <span className="text-xl">
                 <MdCircle />
-              </span> */}
+              </span>
             </React.Fragment>
           ))}
-          </div>
-        ))}
-        </section>
-      );
+        </div>
+      ))}
+    </section>
+  );
 };
 
-      export default TechList;
+export default TechList;
