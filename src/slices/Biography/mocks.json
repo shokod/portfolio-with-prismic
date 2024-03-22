@@ -8,17 +8,6 @@
 				"value": "whose",
 				"type": "Text"
 			},
-			"button_text": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Reprehenderit occaecat occaecat esse non. Proident dolor consectetur nulla excepteur dolor do qui. Incididunt officia labore in."
-						}
-					}
-				]
-			},
 			"button_link": {
 				"__TYPE__": "LinkContent",
 				"value": {
@@ -59,6 +48,11 @@
 						}
 					}
 				]
+			},
+			"button_text": {
+				"__TYPE__": "FieldContent",
+				"value": "as",
+				"type": "Text"
 			}
 		},
 		"items": [

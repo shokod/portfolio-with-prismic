@@ -316,12 +316,12 @@ export interface BiographySliceDefaultPrimary {
   /**
    * Button Text field in *Biography → Primary*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Text
    * - **Placeholder**: *None*
    * - **API ID Path**: biography.primary.button_text
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  button_text: prismic.RichTextField;
+  button_text: prismic.KeyTextField;
 
   /**
    * Button Link field in *Biography → Primary*
