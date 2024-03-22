@@ -24,8 +24,8 @@ const component = React.useRef(null);
 useEffect(() => {
   let ctx = gsap.context(() => {
     const tml = gsap.timeline({
-      scrollTrigger: {
-        markers: true,
+      scrollTrigger: { 
+        trigger: component.current,
         start: "top bottom",
         end: "bottom top",
         scrub: 4,
@@ -47,7 +47,7 @@ useEffect(() => {
             ? gsap.utils.random(-600, -400)
             : gsap.utils.random(600, 400);
         },
-
+        ease: "power1.inOut",
       },
     )
   }, component);
