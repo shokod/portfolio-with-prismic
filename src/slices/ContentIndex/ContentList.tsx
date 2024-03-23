@@ -11,27 +11,30 @@ type ContentListProps = {
 export default function ContentList({ items, contentType, fallbackItemImage, viewMoreText = "View More" }: ContentListProps) {
     return (
         <div>
-            <ul className="grid border-b border-b-slate-100">
+            <ul >
                 {items.map((item, index) => (
-                <li key={index}
-                className="list-item opacity-0">
-                    <a href=""
-                    className="flex flex-col justify-between border-t border-t-slate-100 py-10  text-slate-200 md:flex-row ">
-                        <div className="flex flex-col">
-                            <span className="text-3xl font-bold">{item.data.title}</span>
-                            <div className="flex gap-3 text-yellow-400">
-                                {item.tags.map((tag, index) => (
-                                    <span key={index} className="text-lg font-bold">{tag}</span>
+                    <li key={index}
+                    className=''
+                       >
+                        <a href=""
+                        className='flex gap-3 p-4 border border-slate-200 rounded-lg hover:bg-slate-600 transition-colors duration-200 ease-in-out'
+                            >
+                            <div className='flex flex-col' >
+                                <span className='text-2xl font-bold'>{item.data.title}
+                                </span>
+                                <div className='flex gap-3 text-green-400 text-lg font-mono'>
+                                    {item.tags.map((tag, index) => (
+                                        <span key={index}>{tag}</span>
 
-                                ))}
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                        <span className="ml-auto flex items-center gap-2 text-xl font-medium md:ml-0">{viewMoreText}</span>
-                    </a>
-                </li>
+                            <span>{viewMoreText}</span>
+                        </a>
+                    </li>
                 ))}
             </ul>
-            
+
         </div>
     )
 }
