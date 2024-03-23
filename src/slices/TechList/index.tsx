@@ -4,7 +4,7 @@ import Heading from "@/components/Heading";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import React, { useEffect } from "react";
-import { MdCircle } from "react-icons/md";
+import { MdArrowCircleRight, MdCircle } from "react-icons/md";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -85,7 +85,7 @@ useEffect(() => {
                 {tech_name}
               </span>
               <span className="text-xl">
-                <MdCircle />
+                <MdArrowCircleRight />
               </span>
             </React.Fragment>
           ))}
