@@ -21,7 +21,7 @@ export default function RootLayout({
       <Header />
       <body className={urbanist.className}>
         {children}
-        <div className="h-[200vh]"></div>
+        {/* <div className="h-[200vh]"></div> */}
       </body>
     </html>
   );
