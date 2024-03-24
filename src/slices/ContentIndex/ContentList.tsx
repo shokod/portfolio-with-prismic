@@ -22,7 +22,7 @@ export default function ContentList({
     const [currentItem, setCurrentItem] = useState<null | number>(null)
 
     const contentImages = items.map((item) => {
-        const image = isFilled.image(item.data.image) ? item.data.image : fallbackItemImage;
+        const image = isFilled.image(item.data.hover_image) ? item.data.hover_image : fallbackItemImage;
 
         return asImageSrc(image, {
             width: 220,
@@ -36,9 +36,14 @@ export default function ContentList({
         setCurrentItem(index);
     }
 
+    const onMouseLeave = () => {
+      setCurrentItem(null);  
+    }
+
     return (
         <div ref={component}>
-            <ul className='grid border-b border-b-slate-100' >
+            <ul className='grid border-b border-b-slate-100'
+            onMouseLeave={onMouseLeave} >
                 {items.map((item, index) => (
                     <>
                         {isFilled.keyText(item.data.title) && (
