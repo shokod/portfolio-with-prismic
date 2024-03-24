@@ -1,5 +1,7 @@
 import { Content } from '@prismicio/client';
+import Link from 'next/link';
 import React from 'react'
+import { MdArrowOutward } from 'react-icons/md';
 
 type ContentListProps = {
     items: Content.BlogPostDocument[] | Content.ProjectDocument[];
@@ -8,16 +10,22 @@ type ContentListProps = {
     viewMoreText: Content.ContentIndexSlice['primary']['view_more_text'];
 }
 
-export default function ContentList({ items, contentType, fallbackItemImage, viewMoreText = "View More" }: ContentListProps) {
+export default function ContentList({ 
+    items, 
+    contentType, 
+    fallbackItemImage, 
+    viewMoreText = "View More" }: ContentListProps) {
+
+        const urlprefix = contentType === "Blog" ? "/blog" : "/projects"
     return (
         <div>
-            <ul >
+            <ul className='grid border-b border-b-slate-100' >
                 {items.map((item, index) => (
                     <li key={index}
-                    className=''
+                    className='list-item opacity-0f'
                        >
-                        <a href=""
-                        className='flex gap-3 p-4 border border-slate-200 rounded-lg hover:bg-slate-600 transition-colors duration-200 ease-in-out'
+                        <Link href={urlprefix + '/' + item.uid}
+                        className='flex flex-col justify-between border-t border-t-slate-100 py-10 text-slate-200 md:flex-row'
                             >
                             <div className='flex flex-col' >
                                 <span className='text-2xl font-bold'>{item.data.title}
@@ -29,8 +37,8 @@ export default function ContentList({ items, contentType, fallbackItemImage, vie
                                     ))}
                                 </div>
                             </div>
-                            <span>{viewMoreText}</span>
-                        </a>
+                            <span className='ml-auto flex items-center gap-2 text-lg font-medium md:ml-0'>{viewMoreText}<MdArrowOutward/></span>
+                        </Link>
                     </li>
                 ))}
             </ul>
