@@ -34,7 +34,7 @@ const Biography = ({ slice }: BiographyProps): JSX.Element => {
         />
         <Avatar
         image={slice.primary.avatar}
-        className="row-start-1 max-wsm md:col-start-2 md:row-end-3 border-r-green-500"
+        className="row-start-1 max-wsm md:col-start-2 md:row-end-3 border-r-green-600"
         alt='Image of the author of the biography.'
         />
       </div>

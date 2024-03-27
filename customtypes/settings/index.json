@@ -42,6 +42,7 @@
         "config": {
           "label": "CTA Link",
           "placeholder": "",
+          "allowTargetBlank": false,
           "select": null
         }
       },
@@ -69,10 +70,11 @@
         }
       },
       "linkedin_link": {
-        "type": "Text",
+        "type": "Link",
         "config": {
           "label": "LinkedIn Link",
-          "placeholder": ""
+          "placeholder": "",
+          "select": null
         }
       }
     },

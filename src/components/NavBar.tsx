@@ -18,7 +18,7 @@ export default function NavBar({
 
     return (
         <nav aria-label="Main navigation">
-            <ul className="flex flex-col justify-between rounded-b-lg bg-slate-50 px-4 py-2 md:m-4 md:flex-row md:items-center md:rounded-xl">
+            <ul className="flex flex-col justify-between rounded-b-lg bg-slate-300 px-4 py-2 md:m-4 md:flex-row md:items-center md:rounded-xl">
                 <div className="flex items-center justify-between">
                     <NameLogo name={settings.data.name} />
                     <button
@@ -61,7 +61,7 @@ export default function NavBar({
                                 >
                   <span
                       className={clsx(
-                          "absolute inset-0 z-0 h-full translate-y-12 rounded bg-yellow-300 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
+                          "absolute inset-0 z-0 h-full translate-y-12 rounded bg-[#13aa52] transition-transform duration-300 ease-in-out group-hover:translate-y-0",
                           pathname.includes(asLink(link) as string)
                               ? "translate-y-6"
                               : "translate-y-18",
@@ -129,7 +129,7 @@ function DesktopMenu({
                         >
               <span
                   className={clsx(
-                      "absolute inset-0 z-0 h-full rounded bg-green-300 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
+                      "absolute inset-0 z-0 h-full rounded bg-[#13aa52] transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
                       pathname.includes(asLink(link) as string)
                           ? "translate-y-6"
                           : "translate-y-8",

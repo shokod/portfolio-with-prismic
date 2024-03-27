@@ -21,7 +21,7 @@ export default function Button({
     <PrismicNextLink
       field={linkField}
       className={clsx(
-        "group relative flex w-fit items-center justify-center overflow-hidden rounded-md border-2 border-slate-900 bg-slate-500  px-4 py-2 font-bold transition-transform ease-out  hover:scale-105",
+        "group relative flex w-fit items-center justify-center overflow-hidden rounded-md border-2 border-slate-900 bg-slate-100 text-slate-900  px-4 py-2 font-bold transition-transform ease-out  hover:scale-105",
         className,
       )}
     >
@@ -31,7 +31,7 @@ export default function Button({
         )}
       />
       <span className="relative flex items-center justify-center gap-2">
-        {label} {showIcon && <MdArrowOutward className="inline-block" />}
+        {label} {showIcon && <MdArrowOutward className="inline-block text-slate-900" />}
       </span>
     </PrismicNextLink>
   );
