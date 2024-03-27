@@ -18,13 +18,40 @@ export default function ContentList({
     fallbackItemImage,
     viewMoreText = "View More" }: ContentListProps) {
 
-    const [currentItem, setCurrentItem] = useState<null | number>(null)
+    
+
     const component = useRef(null)
     const revealRef = useRef(null)
+    const [currentItem, setCurrentItem] = useState<null | number>(null)
 
     const urlprefix = contentType === "Blog" ? "/blog" : "/projects"
 
     const lastMousePosition = useRef({ x: 0, y: 0 })
+    const itemsRef = useRef<Array<HTMLLIElement | null>>([]);
+
+    useEffect(() => {
+        let ctx = gsap.context(() => {
+            itemsRef.current.forEach((item) => {
+                gsap.fromTo(
+                    item,
+                    { opacity: 0, y:20 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1.3,
+                        ease: "elastic.out(1,0,3)",
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top bottom-=100px",
+                            end: "bottom center",
+                            toggleActions: "play none none none"
+                        },
+                    }
+                );
+            });
+            return() => ctx.revert();
+        }, component)
+    }, []);
 
     useEffect(() => {
         const handleMouseMovement = (e: MouseEvent) => {
@@ -43,7 +70,7 @@ export default function ContentList({
                         y: gsap.utils.clamp(0, maxY, mousePosition.y - 160),
                         rotation: speed * (mousePosition.x > lastMousePosition.current.x ? 1 : -1),
                         ease: 'back.out(2)',
-                        duration: 2,
+                        duration: 1.3,
                     })
 
 
@@ -61,6 +88,8 @@ export default function ContentList({
     }
         , [currentItem])
 
+
+
     const contentImages = items.map((item) => {
         const image = isFilled.image(item.data.hover_image) ? item.data.hover_image : fallbackItemImage;
 
@@ -71,6 +100,14 @@ export default function ContentList({
             exp: -10,
         });
     });
+
+    useEffect(()=> {
+        contentImages.forEach((url)=>{
+            if (!url) return;
+            const img = new Image();
+            img.src = url;
+        })
+    }, [contentImages])
 
     const onMouseEnter = (index: number) => {
         setCurrentItem(index);
@@ -114,11 +151,12 @@ export default function ContentList({
             </ul>
             {/* hover element */}
             <div
-                ref={revealRef}
+                
                 className=" hover-reveal pointer-events-none absolute left-0 top-0 -z-10 h-[320px] w-[220px] rounded-lg bg-cover bg-center opacity-0f transition-{background] duration-300"
                 style={{
                     backgroundImage: currentItem !== null ? `url(${contentImages[currentItem]})` : '',
                 }}
+                ref={revealRef}
             >
 
             </div>
