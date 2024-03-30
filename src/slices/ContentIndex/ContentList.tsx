@@ -24,7 +24,7 @@ export default function ContentList({
     const revealRef = useRef(null)
     const [currentItem, setCurrentItem] = useState<null | number>(null)
 
-    const urlprefix = contentType === "Blog" ? "/blog" : "/projects"
+    const urlprefix = contentType === "Blog" ? "/blog" : "/project"
 
     const lastMousePosition = useRef({ x: 0, y: 0 })
     const itemsRef = useRef<Array<HTMLLIElement | null>>([]);
@@ -39,7 +39,8 @@ export default function ContentList({
                         opacity: 1,
                         y: 0,
                         duration: 1.3,
-                        ease: "elastic.out(1,0,3)",
+                        ease: "eastic.out(1,0.3)",
+                       
                         scrollTrigger: {
                             trigger: item,
                             start: "top bottom-=100px",
@@ -49,6 +50,7 @@ export default function ContentList({
                     }
                 );
             });
+
             return() => ctx.revert();
         }, component)
     }, []);
@@ -127,6 +129,7 @@ export default function ContentList({
                             <li key={index}
                                 className='list-item opacity-0f'
                                 onMouseEnter={() => onMouseEnter(index)}
+                                ref={(el) => (itemsRef.current[index] = el)}
                             >
                                 <Link href={urlprefix + '/' + item.uid}
                                     className='flex flex-col justify-between border-t border-t-slate-100 py-10 text-slate-200 md:flex-row'

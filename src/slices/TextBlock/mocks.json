@@ -2,7 +2,19 @@
 	{
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
-		"primary": {},
+		"primary": {
+			"text": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Pariatur excepteur deserunt quis eu. Velit enim occaecat nostrud minim nulla amet sint officia commodo nulla ut."
+						}
+					}
+				]
+			}
+		},
 		"items": []
 	}
 ]
