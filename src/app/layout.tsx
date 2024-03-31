@@ -4,15 +4,22 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import clsx from "clsx";
+import { createClient, repositoryName } from "@/prismicio"
+import { PrismicPreview } from "@prismicio/next";
 
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Delvin Shoko Portfolio",
-  description: "A portfolio website for Delvin Shoko",
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const client = createClient();
+    const settings = await client.getSingle("settings");
 
+    return {
+        title: settings.data.meta_title,
+        description: settings.data.meta_description,
+        
+    };
+}
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,6 +35,7 @@ export default function RootLayout({
       <div className="background-gradient absolute inset-0 -z-50 max-h-screen" />
       <div className="pointer-events-none absolute inset-0 -z-40 h-full bg-[url('/bg-pattern.jpg')] opacity-20 mix-blend-soft-light"></div>
       </body>
+      <PrismicPreview repositoryName={repositoryName}/>
     </html>
   );
 }
