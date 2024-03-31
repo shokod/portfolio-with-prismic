@@ -5,6 +5,14 @@ import { Suspense, useEffect, useRef, useState } from 'react';
 import { Environment, Float, ContactShadows } from '@react-three/drei';
 import { gsap } from 'gsap';
 
+interface GeometryProps {
+  position: [number, number, number];
+  r: number;
+  geometry: THREE.BufferGeometry;
+  materials: THREE.Material[];
+  soundEffects: HTMLAudioElement[];
+}
+
 
 export default function Shapes() {
     return (
@@ -36,12 +44,7 @@ function Geometries() {
 
     const soundEffects = [
         new Audio("/confirmation_001.ogg"),
-        new Audio("/confirmation_002.ogg"),
-        new Audio("/confirmation_003.ogg"),
-        new Audio("/confirmation_004.ogg"),
-        new Audio("/maximize_003.ogg"),
-        new Audio("/maximize_004.ogg"),
-        new Audio("/maximize_005.ogg")
+        
       ];
     const geometries = [
         {
@@ -88,7 +91,7 @@ function Geometries() {
     return geometries.map(({ position, r, geometry }) => (
         <Geometry
             key={JSON.stringify(position)}
-            position={position.map((p) => p * 2)}
+            position={position.map((p) => p * 2) as [number, number, number]}
             r={r}
             geometry={geometry}
             materials={materials}
@@ -97,7 +100,7 @@ function Geometries() {
     );
 }
 
-function Geometry({ position, r, geometry, materials, soundEffects }) {
+function Geometry({ position, r, geometry, materials, soundEffects }: GeometryProps) {
     const meshRef = useRef<THREE.Group<THREE.Object3DEventMap>>(null);
     const [visible, setVisible] = useState(false);
 
@@ -107,8 +110,8 @@ function Geometry({ position, r, geometry, materials, soundEffects }) {
         return gsap.utils.random(materials);
     }
 
-    function handleClick(e) {
-        const mesh = e.object;
+    function handleClick(e: { object: THREE.Object3D }) {
+        const mesh = e.object as THREE.Mesh;
 
         gsap.utils.random(soundEffects).play();
 
@@ -136,14 +139,16 @@ function Geometry({ position, r, geometry, materials, soundEffects }) {
     useEffect(() => {
         let ctx = gsap.context(() => {
           setVisible(true);
-          gsap.from(meshRef.current.scale, {
-            x: 0,
-            y: 0,
-            z: 0,
-            duration: gsap.utils.random(0.8, 1.2),
-            ease: "elastic.out(1,0.3)",
-            delay: gsap.utils.random(0, 0.5),
-          });
+          if (meshRef.current) {
+            gsap.from(meshRef.current.scale, {
+              x: 0,
+              y: 0,
+              z: 0,
+              duration: gsap.utils.random(0.8, 1.2),
+              ease: "elastic.out(1,0.3)",
+              delay: gsap.utils.random(0, 0.5),
+            });
+          }
         });
         return () => ctx.revert();
       }, []);
