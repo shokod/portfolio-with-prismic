@@ -24,7 +24,7 @@ export default function ContentList({
     const revealRef = useRef(null)
     const [currentItem, setCurrentItem] = useState<null | number>(null)
 
-    const urlprefix = contentType === "Blog" ? "/blog" : "/project"
+    const urlprefix = contentType === "Blog" ? "/blog" : "/projects"
 
     const lastMousePosition = useRef({ x: 0, y: 0 })
     const itemsRef = useRef<Array<HTMLLIElement | null>>([]);
