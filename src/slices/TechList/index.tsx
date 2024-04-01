@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 import { MdArrowCircleRight, MdCircle } from "react-icons/md";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { LuSquareStack } from "react-icons/lu";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -85,7 +86,7 @@ useEffect(() => {
                 {tech_name}
               </span>
               <span className="text-xl">
-                <MdArrowCircleRight />
+                <LuSquareStack />
               </span>
             </React.Fragment>
           ))}
