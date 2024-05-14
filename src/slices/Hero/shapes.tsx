@@ -120,7 +120,7 @@ function Geometry({ position, r, geometry, materials, soundEffects }: GeometryPr
             y: `+=${gsap.utils.random(0, 2)}`,
             z: `+=${gsap.utils.random(0, 2)}`,
             duration: 1,
-            ease: 'elastic.out(1,0.3)',
+            ease: 'elastic.out(1,0.2)',
             yoyo: true,
         });
 
