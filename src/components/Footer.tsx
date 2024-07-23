@@ -30,7 +30,7 @@ export default async function Footer() {
                         © {new Date().getFullYear()} {settings.data.name}
                     </p>
                 </div>
-                <nav className="navigation" aria-label="Footer Navigation">
+                <nav className="navigation" aria-label="FooterNavigation">
                     <ul className="flex items-center gap-1">
                         {settings.data.nav_item.map(({ link, label }, index) => (
                             <React.Fragment key={label}>
