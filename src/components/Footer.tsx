@@ -84,6 +84,7 @@ export default async function Footer() {
                             <FaLinkedin />
                         </PrismicNextLink>
                     )}
+
                 </div>
             </div>
         </Bounded>
